@@ -2,8 +2,8 @@ var config = require('config'),
     WebSocketServer = require('ws').Server,
     Client = require('./lib/client'),
     clients = [],
-    wss;
-    
+    wss,
+    nextPort = 8001;
     
 // create the new socket server
 // create the websocket server
@@ -11,7 +11,9 @@ wss = new WebSocketServer(config);
 
 wss.on('connection', function(ws) {
     // create a new client 
-    var client = clients[clients.length] = new Client(ws);
+    var client = clients[clients.length] = new Client(ws, {
+        port: nextPort++
+    });
     
     ws.on('message', function(message) {
         // if the message is a data request, then invoke the request handler
@@ -24,6 +26,9 @@ wss.on('connection', function(ws) {
     });
 
     ws.on('close', function() {
+        // close the client
+        client.close();
+        
         clients.splice(clients.indexOf(client), 1);
     });
 });

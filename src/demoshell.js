@@ -1,11 +1,15 @@
 // req: eve, bootstrap[addin#dropdown, addin#button], codemirror[mode#javascript, theme#monokai]
 
-var editor,
+var editorContainer,
+    editor,
     socket,
-    demos = {};
+    demoshell = {
+        info: info,
+        log: log
+    };
 
 function init() {
-    socket = demos.socket = new WebSocket('ws://localhost:8000');
+    socket = demoshell.socket = new WebSocket('ws://localhost:8000');
     socket.onopen = ready;
     
     socket.onmessage = function(evt) {
@@ -18,10 +22,11 @@ function init() {
         eve.apply(eve, [data.msg, socket].concat(data.args));
     };
     
-    editor = demos.editor = CodeMirror(document.getElementById('editor'), {
-      value: "function myScript(){return 100;}\n",
-      mode:  "javascript",
-      lineNumbers: true
+    editor = demoshell.editor = CodeMirror(editorContainer = document.getElementById('editor'), {
+        value: '',
+        mode:  'javascript',
+        readOnly: true,
+        lineNumbers: true
     });
     
     $(document.body).click(function(evt) {
@@ -35,8 +40,41 @@ function init() {
     });
 }
 
+function bsAlert(html, opts) {
+    var classes = ['label'];
+    
+    // ensure we have opts
+    opts = opts || {};
+    opts.type = opts.type || 'info';
+    classes[classes.length] = 'label-' + opts.type;
+    
+    $('#log').prepend('<li><span class="' + classes.join(' ') + '">' + new Date().getTime() + '</span><div class="log-content">' + html + '</div></li>');
+}
+
+function info(html) {
+    bsAlert(html, { type: 'info' });
+}
+
+function log(text) {
+    console.log(text);
+}
+
 eve.on('demo', function() {
-    socket.send('use:' + eve.nt().split('.').slice(1).join('/'));
+    var demoName = eve.nt().split('.').slice(1).join('/');
+    
+    $('a.brand').html('HTML5 Messaging Demos: ' + demoName);
+    socket.send('use:' + demoName);
+});
+
+eve.on('edit', function() {
+    var navitem = $('a[data-action="edit"]').parent();
+    
+    navitem.toggleClass('active');
+    editor.setOption('readOnly', !navitem.hasClass('active'));
+});
+
+eve.on('clear.log', function() {
+    $('#log').html('');
 });
 
 eve.on('run', function() {
@@ -58,6 +96,10 @@ eve.on('demos', function(demos) {
     $('#demos').html(demos.reduce(function(previous, current, index) {
         return previous + '<li><a href="#" data-action="demo.' + current + '">' + current + '</a></li>';
     }, ''));
+    
+    if (demos.length > 0) {
+        eve('demo.' + demos[0]);
+    }
 });
 
 eve.on('*', function() {

@@ -3,13 +3,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>HTML5 Messaging Demos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="dist/demos.css" rel="stylesheet">
-    <link href="dist/viewer.css" rel="stylesheet">
+    <link href="dist/demoshell.css" rel="stylesheet">
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
@@ -28,12 +27,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="#">HTML5 Messaging Demos</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#" data-action="edit" data-toggle="button">Edit</a></li>
+              <li><a href="#" data-action="run">Run</a></li>
+              <li class="dropdown" id="demolist">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#demolist">
+                    Demos
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu" id="demos">
+                  </ul>
+            </li>
+            <li><a href="#" data-action="clear.log">Clear Log</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -42,31 +49,14 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span7">
+        <div class="span12">
           <div class="row-fluid" id="editor" style="border: 1px solid #ccc;"></div>
-        </div><!--/span-->
-        
-        <div class="span5">
-            <div class="btn-toolbar">
-                <div class="btn-group">
-                    <a class="btn">Back</a>
-                    <a href="#" data-action="run" class="btn">Run</a>
-                    <a class="btn">Next</a>
-                </div>
+        </div>
+      </div><!--/row-->
 
-                <div class="btn-group">
-                  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Select Demo
-                    <span class="caret"></span>
-                  </a>
-              
-                  <ul id="demos" class="dropdown-menu">
-                  </ul>
-                </div>
-            </div>
-
-            <iframe id="demoframe" src="about:blank" scrolling="no" frameborder="no" width="100%"></iframe>
-        </div><!--/span-->
-        
+      <div class="row-fluid">
+        <ul id="log" class="span12">
+        </ul>
       </div><!--/row-->
 
       <footer>
@@ -74,6 +64,6 @@
 
     </div><!--/.fluid-container-->
 
-    <script src="dist/demos.js"></script>
+    <script src="dist/demoshell.js"></script>
   </body>
 </html>
