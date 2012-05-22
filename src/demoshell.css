@@ -60,3 +60,7 @@ div[role="actions"] {
 *[data-view].active {
     display: block;
 }
+
+*[data-view="content"] {
+    overflow-y: scroll;
+}
