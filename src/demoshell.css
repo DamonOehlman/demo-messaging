@@ -7,8 +7,13 @@ div[role="actions"] {
     margin-top: 20px;
 }
 
+#editor {
+    border: 1px solid #ccc;
+}
+
 .CodeMirror {
-    font-size: 1.5em;
+    font-size: 1.7em;
+    line-height: 1.25em;
 }
 
 .CodeMirror-scroll {
@@ -26,12 +31,32 @@ div[role="actions"] {
     border-bottom: 1px solid #e8e8e8;
     clear: left;
     overflow: auto;
+    font-size: 1.8em;
+    line-height: 1.4em;
+    height: 30px;
+    overflow: hidden;
 }
 
 #log li > * {
     float: left;
 }
 
+#log li > span.label {
+    margin-top: 6px;
+}
+
 #log li > .log-content {
     margin-left: 10px;
+    width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+*[data-view] {
+    display: none;
+}
+
+*[data-view].active {
+    display: block;
 }
