@@ -13547,7 +13547,7 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
       };
   
   function init() {
-      socket = demoshell.socket = new WebSocket('ws://localhost:8000');
+      socket = demoshell.socket = new WebSocket('ws://localhost:7999');
       socket.onopen = ready;
       
       socket.onmessage = mapMessageToEve;

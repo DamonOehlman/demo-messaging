@@ -1,6 +1,8 @@
 var config = require('config'),
+    express = require('express'),
     WebSocketServer = require('ws').Server,
     Client = require('./lib/client'),
+    app = express.createServer(),
     clients = [],
     wss,
     nextPort = 8001;
@@ -32,3 +34,6 @@ wss.on('connection', function(ws) {
         clients.splice(clients.indexOf(client), 1);
     });
 });
+
+app.use(express.static(__dirname));
+app.listen(config.webport);
