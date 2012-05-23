@@ -12,6 +12,7 @@
   "dependencies": {
     "config": "0.4.x",
     "debug": "*",
+    "express": "2.5.x",
     "formatter": "0.1.x",
     "ntwitter": "0.3.x",
     "sse": "0.0.x",
