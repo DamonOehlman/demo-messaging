@@ -2,6 +2,7 @@ var config = require('config'),
     express = require('express'),
     WebSocketServer = require('ws').Server,
     Client = require('./lib/client'),
+    out = require('out'),
     app = express.createServer(),
     clients = [],
     wss,
@@ -37,3 +38,4 @@ wss.on('connection', function(ws) {
 
 app.use(express.static(__dirname));
 app.listen(config.webport);
+out('server running on at !{underline}http://localhost:{0}', config.webport);
