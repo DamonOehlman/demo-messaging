@@ -21,9 +21,19 @@ Once installed you can run the demo by simply running:
 
 Once the demo is running, simply open `index.html` from the file system and you should be away.
 
-## Contributing Demos
+## Contributing / Tweaking Demos
 
-To be completed.
+This project is designed to provide you with a console for experimenting with websockets and creating a variety of demos around the technology.  The demos are shown in the interface under the demos drop down menu, and are sourced from the `lib/demos` folder.
+
+When a demo is selected, the console looks for client files (`.js` and `.html` files that might exist in the `lib/demos/client` folder).  If these exists the contents of the files are transmitted to the client (via the websocket connection) and executed in conjunction with the server files.
+
+### Echo Demo
+
+This is a simple demo that demonstrates how to use a web socket connection to send and receive data from both the server and the client.  
+
+### Twitter Streaming Demo
+
+This was the hero demo of the talk and shows how a websocket connection and the [Twitter Streaming API](https://dev.twitter.com/docs/streaming-apis/streams/public) can be used to return tweets matching your search criteria can be returned to the browser incredibly quickly.
 
 ## Updating the Demo Console
 
